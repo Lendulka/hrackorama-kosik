@@ -1,13 +1,17 @@
 import './style.css';
 
-const Header = () => {
+interface IHeaderProps {
+  total: number;
+}
+
+const Header: React.FC<IHeaderProps> = ({ total }) => {
   return (
     <header>
       <div className="brand">
         Hračkorama
       </div>
       <span>
-        Košík: 450 kč
+        Košík: {total} kč
       </span>
     </header>
   )

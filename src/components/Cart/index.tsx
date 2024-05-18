@@ -2,39 +2,30 @@ import IProduct from "../../models/Product";
 import CartItem from "../CartItem";
 import './style.css';
 
-const products: IProduct[] = [
-  {
-    name: 'Hrad z kostek',
-    price: 450,
-    amount: 2,
-  },
-  {
-    name: 'Autíčko na ovládání',
-    price: 1500,
-    amount: 1,
-  },
-  {
-    name: 'Domeček pro panenky',
-    price: 1350,
-    amount: 1,
-  },
-  {
-    name: 'Dětský telefon',
-    price: 730,
-    amount: 1,
-  },
-];
+interface CartProps {
+  products: IProduct[];
+  onAmountChange: (index: number, amount: number) => void;
+}
 
-const Cart = () => {
+const Cart: React.FC<CartProps> = ({ products, onAmountChange }) => {
+
+  // const [cartProducts, setCartProducts] = useState<IProduct[]>(products)
+
+  const result = products.map(p => p.amount).reduce((prev, cur) => prev + cur, 0)
+  // const result = cardProducts.reduce((acc, product) => acc + product.amount, 0);
+
   return (
     <div className="cart">
       <div className="cart__head">
         <h2>Košík</h2>
-        <span>Položek: 1</span>
+        <span>Položek: {result}</span>
       </div>
       <div className="cart__items">
-        {products.map((product) => (
-          <CartItem product={product} key={product.name}/>
+        {products.map((product, index) => (
+          <CartItem
+            product={product}
+            key={product.name}
+            onAmountChange={amount => onAmountChange(index, amount)} />
         ))}
       </div>
     </div>

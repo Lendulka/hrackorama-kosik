@@ -5,13 +5,17 @@ import './style.css';
 
 interface ICartItemProps {
   product: IProduct;
+  onAmountChange: (amount: number) => void;
 }
 
-const CartItem: React.FC<ICartItemProps> = ({ product }) => {
+const CartItem: React.FC<ICartItemProps> = ({ product, onAmountChange }) => {
+
+  // const [count, setCount] = useState<number>(product.amount);
+
   return (
     <div className="cart-item">
       <CartProduct name={product.name} price={product.price} />
-      <Amount value={product.amount} />
+      <Amount count={product.amount} onChange={onAmountChange} />
     </div>
   )
 };

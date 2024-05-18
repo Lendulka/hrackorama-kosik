@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import './style.css';
 
 interface IAmountProps {
-  value: number;
+  count: number;
+  onChange: (value: number) => void;
 }
 
-const Amount: React.FC<IAmountProps> = ({ value }) => {
-  const [count, setCount] = useState(value);
+const Amount: React.FC<IAmountProps> = ({ count, onChange }) => {
+  // const [count, setCount] = useState(value);
 
   const handelIncrement = () => {
-    setCount(count + 1);
+    onChange(count + 1);
   }
 
   const handelDecrement = () => {
     if (count > 0) {
-      setCount(count - 1);
+      onChange(count - 1);
     }
   }
 
